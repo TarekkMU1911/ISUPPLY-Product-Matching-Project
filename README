@@ -1,0 +1,36 @@
+🔹 Step 1: Importing Required Libraries
+Before starting the project, we import all the necessary libraries that will be used throughout the workflow.
+
+🔹 Step 2: Loading and Exploring the Dataset
+We read the dataset file and inspect its structure.
+Check for any missing values and handle them accordingly to ensure data consistency.
+
+🔹 Step 3: Shuffling and Splitting the Data
+To reduce overfitting and improve generalization, we shuffle the dataset.
+We split the data into training and testing sets, ensuring that the "sku" column is stratified to maintain class distribution.
+The processed train and test datasets are then saved for further use.
+
+
+🔹 Step 4: Changing Train & Test Files
+At this stage, you can switch between different training and testing datasets to experiment with different scenarios.
+
+
+🔹 Step 5: Data Preprocessing (The Most Critical Step)
+In text classification, preprocessing plays a major role. We apply multiple Arabic text normalization and cleaning steps:
+
+Basic Arabic Preprocessing:
+Normalize different forms of the same character (e.g., إ, أ, آ → ا).
+Keep only Arabic and English letters and essential characters.
+Remove repeated characters in a sequence (e.g., "جديييد" → "جديد").
+Split numbers from words (e.g., "ab123cd" → "ab 123 cd").
+Handling Common Misclassifications:
+Initially, our model struggled with some medicines having multiple written variations.
+Example of misclassification issue:
+اجمنتين 20 جم قرص مصنع س
+بندول 30 جم قرص مصنع س
+بندول شريط
+To solve this, we removed measurement units (جم, مجم, etc.) as it doesn't affect the result also if 2 different classes have it , it may leads to miss classifcation .
+We unified words with similar meanings (e.g., قرص, اقراص → قرص). (we have made this in many words like كريم ، لمبول ، جيل) we made this to prevent missclassification as an exmaple we have 2 classes c1 and c2 ,  c1 was trained with data have word قرص and c2 have trained to data have word اقراص if we test a new medicine related to c1 but it have word اقراص it may misclassify also it have the same menning .
+
+
+
