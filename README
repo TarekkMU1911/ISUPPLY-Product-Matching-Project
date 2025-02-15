@@ -1,36 +1,61 @@
-🔹 Step 1: Importing Required Libraries
-Before starting the project, we import all the necessary libraries that will be used throughout the workflow.
+User Guide for Making Predictions:
+1- Load the Dataset you want the model to train on , in the ( Reading Training Dataset ) section [cell number 2].
+2- Choose the font path according to your OS and comment the other one , in the ( Visualizing Most Repeated Products ) section [cell number 13].
+3- Load the Dataset you want the model to be tested  on , in the ( Predictions For Test Set ) section [cell number 29].
+4- This python notebook will ouptut 3 things :
+    - The model saved as h5 file
+    - The model predictions on the validation Dataset
+    - The model predictions on the test Dataset
+By following these steps, users can efficiently utilize the trained model for accurate product matching predictions.
 
-🔹 Step 2: Loading and Exploring the Dataset
-We read the dataset file and inspect its structure.
-Check for any missing values and handle them accordingly to ensure data consistency.
+How it works ?
 
-🔹 Step 3: Shuffling and Splitting the Data
-To reduce overfitting and improve generalization, we shuffle the dataset.
-We split the data into training and testing sets, ensuring that the "sku" column is stratified to maintain class distribution.
-The processed train and test datasets are then saved for further use.
+Step 1: Importing Required Libraries
+Before starting the project, we import all the necessary libraries that will be used throughout the workflow. These libraries include essential data processing tools such as Pandas, NumPy, and SciPy, along with machine learning frameworks like TensorFlow and Scikit-learn. We also include specialized NLP libraries such as NLTK, Arabic Reshaper, and Bidi for handling Arabic text effectively. Ensuring all required libraries are installed and correctly imported is crucial for the smooth execution of the project.
 
+Step 2: Loading and Exploring the Dataset
+We read the dataset file and inspect its structure. This involves checking the number of rows and columns, understanding data types, and identifying any inconsistencies.
 
-🔹 Step 4: Changing Train & Test Files
-At this stage, you can switch between different training and testing datasets to experiment with different scenarios.
+Key tasks in this step include:
+- Verifying the dataset format (CSV, JSON, Excel, etc.) and ensuring compatibility.
+- Checking for any missing values and handling them accordingly to ensure data consistency. This may involve filling missing values with the median, mean, or mode, or completely removing rows with excessive missing data.
+- Conducting an initial exploratory data analysis (EDA) to understand the distribution of key features and identify potential issues in the dataset.
 
+Step 3: Shuffling and Splitting the Data
+To reduce overfitting and improve generalization, we shuffle the dataset to ensure that the order of data does not introduce any bias into the model.
 
-🔹 Step 5: Data Preprocessing (The Most Critical Step)
-In text classification, preprocessing plays a major role. We apply multiple Arabic text normalization and cleaning steps:
+Key processes in this step:
+- Splitting the data into training and testing sets, ensuring that the "sku" column is stratified to maintain class distribution across both sets.
+- Performing multiple experiments to test different split ratios (e.g., 80-20, 70-30) and selecting the optimal split that provides the best model performance.
+- Saving the processed train and test datasets for further use, which ensures consistency across multiple training runs and experiments.
 
-Basic Arabic Preprocessing:
-Normalize different forms of the same character (e.g., إ, أ, آ → ا).
-Keep only Arabic and English letters and essential characters.
-Remove repeated characters in a sequence (e.g., "جديييد" → "جديد").
-Split numbers from words (e.g., "ab123cd" → "ab 123 cd").
-Handling Common Misclassifications:
-Initially, our model struggled with some medicines having multiple written variations.
-Example of misclassification issue:
-اجمنتين 20 جم قرص مصنع س
-بندول 30 جم قرص مصنع س
-بندول شريط
-To solve this, we removed measurement units (جم, مجم, etc.) as it doesn't affect the result also if 2 different classes have it , it may leads to miss classifcation .
-We unified words with similar meanings (e.g., قرص, اقراص → قرص). (we have made this in many words like كريم ، لمبول ، جيل) we made this to prevent missclassification as an exmaple we have 2 classes c1 and c2 ,  c1 was trained with data have word قرص and c2 have trained to data have word اقراص if we test a new medicine related to c1 but it have word اقراص it may misclassify also it have the same menning .
+Step 4: Changing Train & Test Files
+At this stage, users can switch between different training and testing datasets to experiment with different scenarios. This flexibility allows for testing various preprocessing techniques, feature selections, and model configurations.
 
+Considerations:
+- Ensuring that the structure of different datasets remains consistent to avoid compatibility issues.
+- Testing alternative datasets with different characteristics, such as variations in product descriptions, different levels of data augmentation, and diverse distributions.
+- Validating the impact of different dataset versions on model performance by tracking metrics such as accuracy, precision, and recall.
 
+Step 5: Data Preprocessing (The Most Critical Step)
+In text classification, preprocessing plays a major role in improving model accuracy and reducing errors. We apply multiple Arabic text normalization and cleaning steps to enhance data quality before training the model.
 
+Key Preprocessing Techniques:
+- Basic Arabic Preprocessing:
+  - Normalize different forms of the same character (e.g., إ, أ, آ → ا) to unify text variations.
+  - Keep only Arabic and English letters and essential characters while removing unnecessary symbols.
+  - Remove repeated characters in a sequence (e.g., "جديييد" → "جديد") to eliminate redundant variations.
+  - Split numbers from words (e.g., "ab123cd" → "ab 123 cd") to improve tokenization and feature extraction.
+
+- Handling Common Misclassifications:
+  - Identifying cases where the model struggles due to multiple written variations of medicines.
+  - Removing measurement units (جم, مجم, مل, etc.) when they do not contribute meaningfully to classification. Retaining these units can lead to incorrect classifications if different categories contain similar units.
+  - Unifying words with similar meanings (e.g., قرص, اقراص → قرص). This prevents misclassification caused by slight wording differences. For example, if class C1 is trained with the word قرص and class C2 is trained with the word اقراص, a new sample containing اقراص might be misclassified despite being more relevant to class C1.
+  - Standardizing pharmaceutical forms by replacing different terms with a single unified representation (e.g., "جيل" → "كريم"). This ensures that the model correctly identifies products regardless of minor spelling differences.
+
+Additional Considerations:
+- Implementing lemmatization and stemming where applicable to reduce word variations while preserving meaning.
+- Handling spelling errors by leveraging spell-checking algorithms to correct common mistakes in product names.
+- Creating a comprehensive preprocessing pipeline that can be applied consistently across all datasets to maintain uniformity.
+
+By carefully applying these preprocessing steps, we enhance the model's ability to recognize patterns and improve classification accuracy, leading to a more robust and reliable product matching system.
