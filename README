@@ -11,7 +11,8 @@ By following these steps, users can efficiently utilize the trained model for ac
 How it works ?
 
 Step 1: Importing Required Libraries
-Before starting the project, we import all the necessary libraries that will be used throughout the workflow. These libraries include essential data processing tools such as Pandas, NumPy, and SciPy, along with machine learning frameworks like TensorFlow and Scikit-learn. We also include specialized NLP libraries such as NLTK, Arabic Reshaper, and Bidi for handling Arabic text effectively. Ensuring all required libraries are installed and correctly imported is crucial for the smooth execution of the project.
+Before starting the project, we import all the necessary libraries that will be used throughout the workflow. These libraries include essential data processing tools such as Pandas, NumPy, and SciPy, along with machine learning frameworks like TensorFlow and Scikit-learn.
+We also include specialized NLP libraries such as NLTK, Arabic Reshaper, and Bidi for handling Arabic text effectively. Ensuring all required libraries are installed and correctly imported is crucial for the smooth execution of the project.
 
 Step 2: Loading and Exploring the Dataset
 We read the dataset file and inspect its structure. This involves checking the number of rows and columns, understanding data types, and identifying any inconsistencies.
@@ -32,11 +33,6 @@ Key processes in this step:
 Step 4: Changing Train & Test Files
 At this stage, users can switch between different training and testing datasets to experiment with different scenarios. This flexibility allows for testing various preprocessing techniques, feature selections, and model configurations.
 
-Considerations:
-- Ensuring that the structure of different datasets remains consistent to avoid compatibility issues.
-- Testing alternative datasets with different characteristics, such as variations in product descriptions, different levels of data augmentation, and diverse distributions.
-- Validating the impact of different dataset versions on model performance by tracking metrics such as accuracy, precision, and recall.
-
 Step 5: Data Preprocessing (The Most Critical Step)
 In text classification, preprocessing plays a major role in improving model accuracy and reducing errors. We apply multiple Arabic text normalization and cleaning steps to enhance data quality before training the model.
 
@@ -50,12 +46,12 @@ Key Preprocessing Techniques:
 - Handling Common Misclassifications:
   - Identifying cases where the model struggles due to multiple written variations of medicines.
   - Removing measurement units (جم, مجم, مل, etc.) when they do not contribute meaningfully to classification. Retaining these units can lead to incorrect classifications if different categories contain similar units.
-  - Unifying words with similar meanings (e.g., قرص, اقراص → قرص). This prevents misclassification caused by slight wording differences. For example, if class C1 is trained with the word قرص and class C2 is trained with the word اقراص, a new sample containing اقراص might be misclassified despite being more relevant to class C1.
+  - Unifying words with similar meanings (e.g., قرص, اقراص → قرص). This prevents misclassification caused by slight wording differences.
+For example, if class C1 is trained with the word قرص and class C2 is trained with the word اقراص, a new sample containing اقراص might be misclassified despite being more relevant to class C1.
   - Standardizing pharmaceutical forms by replacing different terms with a single unified representation (e.g., "جيل" → "كريم"). This ensures that the model correctly identifies products regardless of minor spelling differences.
 
-Additional Considerations:
-- Implementing lemmatization and stemming where applicable to reduce word variations while preserving meaning.
-- Handling spelling errors by leveraging spell-checking algorithms to correct common mistakes in product names.
-- Creating a comprehensive preprocessing pipeline that can be applied consistently across all datasets to maintain uniformity.
 
 By carefully applying these preprocessing steps, we enhance the model's ability to recognize patterns and improve classification accuracy, leading to a more robust and reliable product matching system.
+
+and you can take a look through our power point presentation from the following link 
+https://docs.google.com/presentation/d/1zUrBfwbYEpecU-YVJgpXQywl_mmqgeWl/edit?usp=sharing&ouid=117402692951599971689&rtpof=true&sd=true
