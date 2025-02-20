@@ -1,58 +1,62 @@
-User Guide for Making Predictions:
-First , Open ISUPPLY Product Matching Project .ipynb
-1- Load the Dataset you want the model to train on , in the ( Reading Training Dataset ) section [cell number 2].
-2- Choose the font path according to your OS and comment the other one , in the ( Visualizing Most Repeated Products ) section [cell number 13].
-3- Load the Dataset you want the model to be tested  on , in the ( Predictions For Test Set ) section [cell number 30].
-4- This python notebook will ouptut 3 things :
-    - The model saved as h5 file
-    - The model predictions on the validation Dataset
-    - The model predictions on the test Dataset
-By following these steps, users can efficiently utilize the trained model for accurate product matching predictions.
+# 📝 User Guide for Making Predictions
 
-How it works ?
+## 📌 Installation Requirements
+Before running the project, ensure you have installed all the necessary libraries. You can install them using the following command:
 
-Step 1: Importing Required Libraries
-Before starting the project, we import all the necessary libraries that will be used throughout the workflow. These libraries include essential data processing tools such as Pandas, NumPy, and SciPy, along with machine learning frameworks like TensorFlow and Scikit-learn.
-We also include specialized NLP libraries such as NLTK, Arabic Reshaper, and Bidi for handling Arabic text effectively. Ensuring all required libraries are installed and correctly imported is crucial for the smooth execution of the project.
+```bash
+pip install numpy pandas xgboost scikit-learn tensorflow scipy nltk matplotlib seaborn arabic-reshaper python-bidi wordcloud
+```
 
-Step 2: Loading and Exploring the Dataset
-We read the dataset file and inspect its structure. This involves checking the number of rows and columns, understanding data types, and identifying any inconsistencies.
+Additionally, download the NLTK stopwords:
+```python
+import nltk
+nltk.download('stopwords')
+```
 
-Key tasks in this step include:
-- Verifying the dataset format (CSV, JSON, Excel, etc.) and ensuring compatibility.
-- Checking for any missing values and handling them accordingly to ensure data consistency. This may involve filling missing values with the median, mean, or mode, or completely removing rows with excessive missing data.
-- Conducting an initial exploratory data analysis (EDA) to understand the distribution of key features and identify potential issues in the dataset.
+## 🚀 Steps to Use the Model:
+1. **Load the Dataset** for training in the **Reading Training Dataset** section **(cell number 2)**.
+2. **Select the font path** based on your OS and **comment the other option** in the **Visualizing Most Repeated Products** section **(cell number 13)**.
+3. **Load the test dataset** in the **Predictions For Test Set** section **(cell number 30)**.
+4. ✅ **This Python Notebook will generate:**
+   - 📂 **The trained model** (saved as `.h5` file)
+   - 📊 **Model predictions** on the validation dataset
+   - 🔍 **Model predictions** on the test dataset
 
-Step 3: Shuffling and Splitting the Data
-To reduce overfitting and improve generalization, we shuffle the dataset to ensure that the order of data does not introduce any bias into the model.
+By following these steps, users can efficiently utilize the trained model for **accurate product matching**.
 
-Key processes in this step:
-- Splitting the data into training and testing sets, ensuring that the "sku" column is stratified to maintain class distribution across both sets.
-- Performing multiple experiments to test different split ratios (e.g., 80-20, 70-30) and selecting the optimal split that provides the best model performance.
-- Saving the processed train and test datasets for further use, which ensures consistency across multiple training runs and experiments.
+## 📚 Required Libraries
+This project requires the following Python libraries:
 
-Step 4: Changing Train & Test Files
-At this stage, users can switch between different training and testing datasets to experiment with different scenarios. This flexibility allows for testing various preprocessing techniques, feature selections, and model configurations.
+```python
+import numpy as np
+import pandas as pd
+import re
+import xgboost as xgb
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
+from scipy.sparse import csr_matrix
+import scipy
+import nltk
+from nltk.corpus import stopwords
+import matplotlib.pyplot as plt
+import seaborn as sns
+import arabic_reshaper
+from bidi.algorithm import get_display
+from wordcloud import WordCloud
+from collections import Counter
+from matplotlib import font_manager
+import warnings
+warnings.filterwarnings("ignore")
+```
 
-Step 5: Data Preprocessing (The Most Critical Step)
-In text classification, preprocessing plays a major role in improving model accuracy and reducing errors. We apply multiple Arabic text normalization and cleaning steps to enhance data quality before training the model.
-
-Key Preprocessing Techniques:
-- Basic Arabic Preprocessing:
-  - Normalize different forms of the same character (e.g., إ, أ, آ → ا) to unify text variations.
-  - Keep only Arabic and English letters and essential characters while removing unnecessary symbols.
-  - Remove repeated characters in a sequence (e.g., "جديييد" → "جديد") to eliminate redundant variations.
-  - Split numbers from words (e.g., "ab123cd" → "ab 123 cd") to improve tokenization and feature extraction.
-
-- Handling Common Misclassifications:
-  - Identifying cases where the model struggles due to multiple written variations of medicines.
-  - Removing measurement units (جم, مجم, مل, etc.) when they do not contribute meaningfully to classification. Retaining these units can lead to incorrect classifications if different categories contain similar units.
-  - Unifying words with similar meanings (e.g., قرص, اقراص → قرص). This prevents misclassification caused by slight wording differences.
-For example, if class C1 is trained with the word قرص and class C2 is trained with the word اقراص, a new sample containing اقراص might be misclassified despite being more relevant to class C1.
-  - Standardizing pharmaceutical forms by replacing different terms with a single unified representation (e.g., "جيل" → "كريم"). This ensures that the model correctly identifies products regardless of minor spelling differences.
 
 
-By carefully applying these preprocessing steps, we enhance the model's ability to recognize patterns and improve classification accuracy, leading to a more robust and reliable product matching system.
 
-and you can take a look through our power point presentation from the following link 
+
+## And you can take a look through our power point presentation from the following link to get a better understanding of the project and how it works:
 https://docs.google.com/presentation/d/1uvlB1GkI0fr79_Zyu52x0CJWHS8nvzi2/edit?usp=sharing&ouid=117402692951599971689&rtpof=true&sd=true
