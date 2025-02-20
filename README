@@ -2,7 +2,7 @@ User Guide for Making Predictions:
 First , Open ISUPPLY Product Matching Project .ipynb
 1- Load the Dataset you want the model to train on , in the ( Reading Training Dataset ) section [cell number 2].
 2- Choose the font path according to your OS and comment the other one , in the ( Visualizing Most Repeated Products ) section [cell number 13].
-3- Load the Dataset you want the model to be tested  on , in the ( Predictions For Test Set ) section [cell number 29].
+3- Load the Dataset you want the model to be tested  on , in the ( Predictions For Test Set ) section [cell number 30].
 4- This python notebook will ouptut 3 things :
     - The model saved as h5 file
     - The model predictions on the validation Dataset
