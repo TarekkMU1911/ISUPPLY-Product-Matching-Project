@@ -1,6 +1,7 @@
-# 📝 User Guide for Making Predictions
+# User Guide for Making Predictions
 
-## 📌 Installation Requirements
+## Installation Requirements
+
 Before running the project, ensure you have installed all the necessary libraries. You can install them using the following command:
 
 ```bash
@@ -8,24 +9,27 @@ pip install numpy pandas xgboost scikit-learn tensorflow scipy nltk matplotlib s
 ```
 
 Additionally, download the NLTK stopwords:
+
 ```python
 import nltk
 nltk.download('stopwords')
 ```
 
-## 🚀 Steps to Use the Model:
+## Steps to Use the Model:
+
 1. **Load the Dataset** for training in the **Reading Training Dataset** section **(cell number 2)**.
 2. **Select the font path** based on your OS and **comment the other option** in the **Visualizing Most Repeated Products** section **(cell number 13)**.
 3. **Load the test dataset** in the **Predictions For Test Set** section **(cell number 30)**.
-4. ✅ **This Python Notebook will generate:**
-   - 📂 **The trained model** (saved as `.h5` file)
-   - 📊 **Model predictions** on the validation dataset
-   - 🔍 **Model predictions** on the test dataset
+4. **This Python Notebook will generate:**
+   - **The trained model** (saved as `.h5` file)
+   - **Model predictions** on the validation dataset
+   - **Model predictions** on the test dataset
 
 By following these steps, users can efficiently utilize the trained model for **accurate product matching**.
 
-## 📚 Required Libraries
-This project requires the following Python libraries:
+## Required Libraries
+
+Ensure you have the following libraries installed in your environment. You can install them using pip as mentioned above.
 
 ```python
 import numpy as np
@@ -53,6 +57,11 @@ from matplotlib import font_manager
 import warnings
 warnings.filterwarnings("ignore")
 ```
+
+## How It Works?
+
+This notebook processes product matching using a deep learning model. It leverages NLP techniques for text vectorization, feature extraction, and classification. Follow the steps above to ensure proper execution.
+
 
 
 
